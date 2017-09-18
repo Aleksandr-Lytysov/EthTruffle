@@ -1,0 +1,26 @@
+version: "3"
+services:
+  node:
+    image: node
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-db-data:/var/lib/mongodb
+    networks:
+      - backend
+
+  pg-db:
+    image: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - pg-db-data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+networks:
+  backend:
+
+volumes:
+  pg-db-data:
+  mongo-db-data:
