@@ -1,26 +1,18 @@
 version: "3"
 services:
-  node:
-    image: node
+  web:
+    image: aleksandrlytysov/eth-truffle:alpha
+    deploy:
+      replicas: 5
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
     ports:
-      - 27017:27017
-    volumes:
-      - mongo-db-data:/var/lib/mongodb
+      - "80:80"
     networks:
-      - backend
-
-  pg-db:
-    image: postgres
-    ports:
-      - 5432:5432
-    volumes:
-      - pg-db-data:/var/lib/postgresql/data
-    networks:
-      - backend
-
+      - webnet
 networks:
-  backend:
-
-volumes:
-  pg-db-data:
-  mongo-db-data:
+  webnet:
