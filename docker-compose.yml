@@ -2,17 +2,17 @@ version: "3"
 services:
   web:
     image: aleksandrlytysov/eth-truffle:alpha
-    deploy:
-      replicas: 5
-      resources:
-        limits:
-          cpus: "0.1"
-          memory: 50M
-      restart_policy:
-        condition: on-failure
     ports:
-      - "80:80"
+      - "8085:80"
     networks:
       - webnet
+  etherium:
+    image: desmart/testrpc:latest
+    ports:
+      - "8545:8545"
+    networks:
+      - webnet
+  truffle:
+    image: desmart/testrpc:latest
 networks:
   webnet:
